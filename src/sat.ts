@@ -37,7 +37,7 @@ export const axisOverlap = (
   return null;
 };
 
-const _sat = (
+export const sat = (
   vectorsA: IVector[],
   vectorsB: IVector[]
 ): IIntersection | null => {
@@ -75,19 +75,4 @@ const _sat = (
   }
 
   return minIntersection;
-};
-
-export const sat = (
-  vectorsA: IVector[],
-  vectorsB: IVector[]
-): IIntersection | null => {
-  let intersectionA = _sat(vectorsA, vectorsB);
-  // let intersectionB = _sat(vectorsB, vectorsA);
-
-  //  if (!intersectionA || !intersectionB) return null;
-
-  //if (Math.abs(intersectionA.penetration) === 0) return null;
-  //if (Math.abs(intersectionB.penetration) === 0) return null;
-
-  return intersectionA;
 };
