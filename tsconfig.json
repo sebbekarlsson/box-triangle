@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "baseUrl": ".",
+    "module": "es6",
+    "target": "es5",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "src",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowJs": true
+
+  },
+  "files": ["src/index.ts"]
+}
