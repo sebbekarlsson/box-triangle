@@ -41,20 +41,20 @@ const _sat = (
   vectorsA: IVector[],
   vectorsB: IVector[]
 ): IIntersection | null => {
-  let minIntersection: |IIntersection | null = null;
+  let minIntersection: IIntersection | null = null;
   const axises: IVector[] = [];
 
   for (let i = 0; i < vectorsA.length; i++) {
     const v1 = vectorsA[i];
-    const v2 = vectorsA[(i+1)%vectorsA.length];
+    const v2 = vectorsA[(i + 1) % vectorsA.length];
     const edge = vec3Sub(v1, v2);
     const axis = vec3Unit(edge);
     axises.push(axis);
   }
 
-   for (let i = 0; i < vectorsB.length; i++) {
+  for (let i = 0; i < vectorsB.length; i++) {
     const v1 = vectorsB[i];
-    const v2 = vectorsB[(i+1)%vectorsB.length];
+    const v2 = vectorsB[(i + 1) % vectorsB.length];
     const edge = vec3Sub(v1, v2);
     const axis = vec3Unit(edge);
     axises.push(axis);
@@ -66,24 +66,25 @@ const _sat = (
       return null;
     }
 
-    if (minIntersection === null || intersection.penetration < minIntersection.penetration) {
+    if (
+      minIntersection === null ||
+      intersection.penetration < minIntersection.penetration
+    ) {
       minIntersection = intersection;
     }
   }
 
-
   return minIntersection;
 };
-
 
 export const sat = (
   vectorsA: IVector[],
   vectorsB: IVector[]
 ): IIntersection | null => {
   let intersectionA = _sat(vectorsA, vectorsB);
- // let intersectionB = _sat(vectorsB, vectorsA);
+  // let intersectionB = _sat(vectorsB, vectorsA);
 
-//  if (!intersectionA || !intersectionB) return null;
+  //  if (!intersectionA || !intersectionB) return null;
 
   //if (Math.abs(intersectionA.penetration) === 0) return null;
   //if (Math.abs(intersectionB.penetration) === 0) return null;

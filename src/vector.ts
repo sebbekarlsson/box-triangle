@@ -30,16 +30,16 @@ export const vec3Dot = (v1: IVector, v2: IVector) => {
   return dot_x + dot_y + dot_z;
 };
 
-export const vec3Mag = (v: IVector):number => {
+export const vec3Mag = (v: IVector): number => {
   return Math.sqrt(Math.pow(v.x, 2) + Math.pow(v.y, 2) + Math.pow(v.z, 2));
-}
+};
 
 export const vec3Unit = (v: IVector): IVector => {
   const mag = vec3Mag(v);
   if (mag === 0) return vec3(0, 0, 0);
 
   return vec3(v.x / mag, v.y / mag, v.z / mag);
-}
+};
 
 export const vec3Color = (v: IVector): string =>
   `rgb(${Math.round(v.x)},${Math.round(v.y)},${Math.round(v.z)})`;

@@ -24,6 +24,7 @@ export const triangleBoxIntersection = (
 ): IIntersection | null =>
   sat([triangle.v1, triangle.v2, triangle.v3], getBoxVectors(box));
 
-
-export const triangleTriangleIntersection = (t1: ITriangle, t2: ITriangle): IIntersection | null  =>
-  sat([t1.v1, t1.v2, t1.v3], [t2.v1, t2.v2, t2.v3]);
+export const triangleTriangleIntersection = (
+  t1: ITriangle,
+  t2: ITriangle
+): IIntersection | null => sat([t1.v1, t1.v2, t1.v3], [t2.v1, t2.v2, t2.v3]);
