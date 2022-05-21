@@ -1,4 +1,4 @@
-import { IVector, vec3, vec3Dot, vec3Scale } from "./vector";
+import { IVector, vec3, vec3Dot, vec3Scale, vec3Sub, vec3Unit } from "./vector";
 import { IRange } from "./range";
 import { IIntersection } from "./intersection";
 
@@ -37,16 +37,28 @@ export const axisOverlap = (
   return null;
 };
 
-export const sat = (
+const _sat = (
   vectorsA: IVector[],
   vectorsB: IVector[]
 ): IIntersection | null => {
-  let minIntersection: IIntersection = {
-    sign: 1,
-    penetration: Infinity,
-    normal: vec3(0, 0, 0),
-  };
-  const axises: IVector[] = [vec3(1, 0, 0), vec3(0, 1, 0), vec3(0, 0, 1)];
+  let minIntersection: |IIntersection | null = null;
+  const axises: IVector[] = [];
+
+  for (let i = 0; i < vectorsA.length; i++) {
+    const v1 = vectorsA[i];
+    const v2 = vectorsA[(i+1)%vectorsA.length];
+    const edge = vec3Sub(v1, v2);
+    const axis = vec3Unit(edge);
+    axises.push(axis);
+  }
+
+   for (let i = 0; i < vectorsB.length; i++) {
+    const v1 = vectorsB[i];
+    const v2 = vectorsB[(i+1)%vectorsB.length];
+    const edge = vec3Sub(v1, v2);
+    const axis = vec3Unit(edge);
+    axises.push(axis);
+  }
 
   for (const axis of axises) {
     const intersection = axisOverlap(vectorsA, vectorsB, axis);
@@ -54,10 +66,27 @@ export const sat = (
       return null;
     }
 
-    if (intersection.penetration < minIntersection.penetration) {
+    if (minIntersection === null || intersection.penetration < minIntersection.penetration) {
       minIntersection = intersection;
     }
   }
 
+
   return minIntersection;
+};
+
+
+export const sat = (
+  vectorsA: IVector[],
+  vectorsB: IVector[]
+): IIntersection | null => {
+  let intersectionA = _sat(vectorsA, vectorsB);
+ // let intersectionB = _sat(vectorsB, vectorsA);
+
+//  if (!intersectionA || !intersectionB) return null;
+
+  //if (Math.abs(intersectionA.penetration) === 0) return null;
+  //if (Math.abs(intersectionB.penetration) === 0) return null;
+
+  return intersectionA;
 };

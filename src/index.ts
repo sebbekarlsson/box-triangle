@@ -37,14 +37,14 @@ const setup = (): IContext => {
     ...range(100).map((i) =>
       createActor(
         vec3(randRange(0, w), randRange(0, h), 0),
-        vec3(randRange(4, 32), randRange(4, 32), randRange(4, 32)),
+        vec3(randRange(4, 32), randRange(4, 32), 0),
         EActorType.ACTOR_TRIANGLE,
         vec3(255, 255, 255)
       )
     ),
     createActor(
       vec3(0, 0, 0),
-      vec3(64, 64, 64),
+      vec3(64, 64, 0),
       EActorType.ACTOR_BOX,
       vec3(0, 255, 0),
       true

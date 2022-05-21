@@ -14,8 +14,6 @@ export const drawTriangle = (
   ctx.save();
   ctx.strokeStyle = vec3Color(color);
 
-  console.log(vec3Color(color));
-
   ctx.beginPath();
 
   ctx.moveTo(triangle.v1.x, triangle.v1.y);

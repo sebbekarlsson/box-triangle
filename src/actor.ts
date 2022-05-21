@@ -1,6 +1,6 @@
 import { vec3, IVector, vec3Add, vec3Scale, vec3Sub } from "./vector";
 import { drawBox, drawTriangle } from "./draw";
-import { triangleBoxIntersection, ITriangle } from "./triangle";
+import { triangleBoxIntersection, ITriangle, triangleTriangleIntersection } from "./triangle";
 import { IContext, IState } from "./types";
 import { boxIntersection, createBox, IBox } from "./box";
 
@@ -44,7 +44,7 @@ export const drawActor = (context: IContext, actor: IActor) => {
   switch (actor.type) {
     case EActorType.ACTOR_BOX:
       {
-        drawBox(context, createBox(actor.position, actor.size), {
+        drawBox(context, actor.primitive as IBox, {
           color: actor.color,
         });
       }
@@ -104,7 +104,11 @@ export const updateActor = (
       ) {
         nextActor.color = vec3(255, 0, 0);
       }
-    }
+    }/* else if (actor.type === EActorType.ACTOR_TRIANGLE && other.type === EActorType.ACTOR_TRIANGLE) {
+      if (triangleTriangleIntersection(actor.primitive as ITriangle, other.primitive as ITriangle)){
+        nextActor.color = vec3(255, 0, 0);
+      }
+    }*/
   }
 
   return nextActor;
