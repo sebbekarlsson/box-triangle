@@ -57,8 +57,8 @@ export const getBoxVectors = (box: IBox): IVector[] => {
     v5,
     v6,
     v7,
-    v8,
-    v9,
+    v8
+/*     v9,
     v10,
     v11,
     v12,
@@ -73,7 +73,7 @@ export const getBoxVectors = (box: IBox): IVector[] => {
     v21,
     v22,
     v23,
-    v24,
+    v24,*/
   ].map((v) => vec3Add(v, pos));
 };
 
